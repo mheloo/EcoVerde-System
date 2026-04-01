@@ -1,9 +1,6 @@
 package com.EcoVerde.sistemaEcoVerde.domain.fornecedor;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -15,6 +12,7 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String documento; // CPF ou CNPJ
     private String pix;
 
