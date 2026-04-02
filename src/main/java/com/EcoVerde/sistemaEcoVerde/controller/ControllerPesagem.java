@@ -1,0 +1,28 @@
+package com.EcoVerde.sistemaEcoVerde.controller;
+
+import com.EcoVerde.sistemaEcoVerde.dto.NotaPesagemDTO;
+import com.EcoVerde.sistemaEcoVerde.service.PesagemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/pesagens")
+public class ControllerPesagem {
+
+    @Autowired
+    private PesagemService service;
+
+    // Rota: POST http://localhost:8080/api/pesagens/registrar
+    @PostMapping("/registrar")
+    public ResponseEntity<NotaPesagemDTO> registrar(@RequestBody PesagemRequest request) {
+
+        NotaPesagemDTO nota = service.registrarESalvar(
+                request.getDocumento(),
+                request.getPeso(),
+                request.getValorKg()
+        );
+
+        return ResponseEntity.ok(nota);
+    }
+}
