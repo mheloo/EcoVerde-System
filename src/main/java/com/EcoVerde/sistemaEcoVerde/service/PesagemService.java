@@ -8,7 +8,10 @@ import com.EcoVerde.sistemaEcoVerde.repository.PesagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class PesagemService {
@@ -47,6 +50,14 @@ public class PesagemService {
                 pesagemSalva.getDataRegistro()
         );
 
+    }
+
+    public List<Pesagem> listarPesagemDoDia() {
+
+        LocalDateTime inicio = LocalDate.now().atStartOfDay(); //Hoje às 00:00
+        LocalDateTime fim = LocalDate.now().atTime(LocalTime.MAX); //Hoje às 23:59
+
+        return pesagemRepository.findByDataRegistroBetween(inicio, fim);
     }
 
 }
